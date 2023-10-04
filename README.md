@@ -1,5 +1,9 @@
 # retos-frontend
-Practica y experimentos 
+
+Practica y experimentos
 
 ## reto-basico
+
 Mini-aplicación para comprar dispositivos moviles
+
+#test
