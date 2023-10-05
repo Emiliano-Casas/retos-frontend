@@ -3,27 +3,16 @@ import {
 	Card, CardHeader, CardBody, CardFooter,
 	Image, Stack, Heading, Grid, VStack
 } from '@chakra-ui/react';
-
-const fetchResponse = await fetch("https://itx-frontend-test.onrender.com/api/product");
-const items = await fetchResponse.json();
-
-// brand
-// : 
-// "Acer"
-// id
-// : 
-// "ZmGrkLRPXOTpxsU4jjAcv"
-// imgUrl
-// : 
-// "https://itx-frontend-test.onrender.com/images/ZmGrkLRPXOTpxsU4jjAcv.jpg"
-// model
-// : 
-// "Iconia Talk S"
-// price
-// : 
-// "170"
+import { useState, useEffect } from 'react';
 
 export default function Items() {
+	const [items, setItems] = useState([]);
+	useEffect(() => {
+		fetch("https://itx-frontend-test.onrender.com/api/product")
+			.then(response => {
+				response.json().then(itemsJson => setItems(itemsJson));
+			});
+	})
 
 	return (
 		<Box margin="0.5rem">
