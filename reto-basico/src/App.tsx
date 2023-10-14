@@ -2,6 +2,7 @@ import { useState } from 'react';
 // import './App.css'
 import Nav from './components/Nav';
 import Items from './components/Items';
+import { Outlet } from 'react-router-dom';
 
 function App() {
 	const [count, setCount] = useState(0)
@@ -9,7 +10,7 @@ function App() {
 	return (
 		<>
 			<Nav></Nav>
-			<Items></Items>
+			<Outlet></Outlet>
 		</>
 	)
 }

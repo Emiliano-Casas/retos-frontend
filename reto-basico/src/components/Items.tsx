@@ -1,18 +1,27 @@
 import {
-	Flex, Input, Spacer, Text, Box,
-	Card, CardHeader, CardBody, CardFooter,
-	Image, Stack, Heading, Grid, VStack
+	Flex,
+	Input,
+	Spacer,
+	Text,
+	Box, Card,
+	CardBody,
+	Image,
+	Heading,
+	Grid,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
+import { Link, Router } from "react-router-dom";
+import { productsAPI } from '../typesConstants';
 
 export default function Items() {
 	const [items, setItems] = useState([]);
 	useEffect(() => {
-		fetch("https://itx-frontend-test.onrender.com/api/product")
+		fetch(productsAPI)
 			.then(response => {
-				response.json().then(itemsJson => setItems(itemsJson));
+				response.json()
+					.then(itemsJson => setItems(itemsJson));
 			});
-	})
+	}, []);
 
 	return (
 		<Box margin="0.5rem">
@@ -26,24 +35,24 @@ export default function Items() {
 				rowGap="1rem">
 				{
 					items.map((item: any) => (
-						<Card key={item.id} width="10rem">
-							<CardBody>
-								<Flex direction="column" height="100%">
-									<Image
-										src={item.imgUrl}
-										borderRadius='lg'
-									/>
-									{/* <VStack height="auto" width="100%"> */}
-									<Heading size='md' mt="6">{item.model}</Heading>
-									<Text>{item.brand}</Text>
-									<Spacer />
-									<Text color='blue.600' align="center" mt="3" fontSize='2xl'>
-										{item.price}€
-									</Text>
-									{/* </VStack> */}
-								</Flex>
-							</CardBody>
-						</Card>
+						<Link to={'/item/' + item.id} key={item.id}>
+							<Card width="10rem" height="100%">
+								<CardBody>
+									<Flex direction="column" height="100%">
+										<Image
+											src={item.imgUrl}
+											borderRadius='lg'
+										/>
+										<Heading size='md' mt="6">{item.model}</Heading>
+										<Text>{item.brand}</Text>
+										<Spacer />
+										<Text color='blue.600' align="center" mt="3" fontSize='2xl'>
+											{item.price}€
+										</Text>
+									</Flex>
+								</CardBody>
+							</Card>
+						</Link>
 					))
 				}
 			</Grid>
